@@ -1,0 +1,200 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+
+
+p {
+	margin-bottom: 0px;
+}
+
+.navbar {
+    border-radius: 0; 
+    margin-bottom: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+@media (min-width: 768px){
+
+    .navbar-right{
+        margin-right: 33px;
+    }
+    .navbar-nav>li{
+        margin-top: 7px;
+    }
+    .side-nav {
+        top: 50px;
+        width: 42px;
+        background-color: whitesmoke;
+        -webkit-transition-property: width; /* Safari 
+        -webkit-transition-duration: .5s; /* Safari 
+        transition-property: width;
+        transition-duration: .5s;
+    }
+    .side-nav:hover{
+        width: 168px;
+    }
+    #wrapper {
+        padding-left: 134px;
+    }
+    #page-wrapper{
+        margin-top: -30px;
+    }
+}
+.navbar-nav>li{
+    border-bottom: 1px solid #9a7474;
+}
+.navbar-nav>li>a {
+    padding-top: 16px;
+    color: #9a7474;
+}
+.side-nav>li>ul>li>a{
+    color: #9a7474;
+}
+/*
+.navbar{
+	margin: 0;
+	border-radius: 0;
+}
+
+
+/* left-side navigation 
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+*/
