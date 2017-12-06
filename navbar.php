@@ -6,10 +6,8 @@
     </div>
     <div class="navbar-right">
       <ul class="nav navbar-nav collapse navbar-collapse main-nav">
-        <li id="home-li"><a href="home.php">Home</a></li>
-        <li id="about-li"><a href="about.php">About</a></li>
         <li id="logout-li">
-            <a href="index_functions.php?action=logout">Log Out</a>
+            <a href="index-functions.php?action=logout">Log Out</a>
         </li>    
       </ul>
     </div>
@@ -22,16 +20,16 @@
     <header><h2>Dashboard</h2></header>
     <ol class="breadcrumb">
         <li>
-            <i class="fa fa-dashboard"></i> Dashboard
+            <i class="fa fa-dashboard"></i> <a href="home.php">Dashboard</a>
+        </li>
+        <li>
+             <a href= "client.php">Clients</a>
         </li>
         <li>
              <a href= "case.php">Case Disk</a>
         </li>
         <li>
              <a href= "data.php">Data Disk</a>
-        </li>
-         <li>
-             <a href= "client.php">Client Information</a>
         </li>
         <li>
              <a href= "employees.php">Employees</a>
@@ -43,14 +41,16 @@
 
 <?php
     include_once 'footer.php';
-    if(!(isset($_SESSION['status']))){
+/*  if(!(isset($_SESSION['status']))){
         $_SESSION['status'] = 0; //tracks who is the user
 
     }
+*/
 ?>
+<!-- 
 <script>
         $(document).ready(function(){
-            if(<?php echo $_SESSION['userStatus']?> == 1){
+            if(<?php //echo $_SESSION['userStatus']?> == 1){
                 $('#dashboard-li').show();
                 $('#dashboard-header').show();
                 $('#user-nav').hide();
@@ -70,3 +70,4 @@
      });
         
 </script>
+-->

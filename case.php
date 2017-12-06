@@ -23,10 +23,8 @@
 <?php
     include 'footer.php';
 ?>
-
 <?php
-
-	$query = "SELECT caseID, c.clientFname, c.clientLname from case_disk cd join client c on cd.clientID = c.clientID WHERE  cd.clientID = c.clientID";
+	$query = "SELECT c.clientID, caseID, c.clientFname, c.clientLname from case_disk cd join client c on cd.clientID = c.clientID WHERE  cd.clientID = c.clientID GROUP BY c.clientID";
     $res = mysqli_query($conn, $query);
     $data;
     if($res){
@@ -36,13 +34,10 @@
 	        $x++;
 	   }
 	}
-
 ?>
 
 <script type="text/javascript"> //Javascript/jquery when opening document
   $(document).ready(function(){
-
-		
 
     var resdata = <?php echo json_encode($data) ?>; // Populate record data in table using the data from php query
    	console.log(resdata);
@@ -51,12 +46,14 @@
       listTbl.html("");
     
          for(var x=0;x<resdata.length;x++){
-          clientId=resdata[x].clientID;
            var tRow = "<tr>";
-               tRow += "<td><a href='client.php'>" + resdata[x].clientLname  +" "+  resdata[x].clientFname +"</a></td>";
+               tRow += "<td><a href='client-case.php?id=" + resdata[x].clientID + "'>" + resdata[x].clientLname  +" "+  resdata[x].clientFname +"</a></td>";
                tRow += "</tr>";
           listTbl.append(tRow);
         }   // end of populating data
+
+          $('#item-list-tbl').dataTable();
+
 
   });
 	

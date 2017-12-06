@@ -3,17 +3,19 @@
 	include 'navbar.php';
 ?>
 
+
 <div class="container-fluid" style=" height: 583px;">
 	<input type="button" class="btn btn-primary" value="Add New" id="toggle_div"/></br></br>
- 	<form>
+
 		<div id="addNew_div">
+		    <form method="Post" action="home-functions.php?action=add" enctype="multipart/form-data">
 			  <div class="form-group" id="select">
-				<label style="color: white;">Add New Information</label>
+				<label>Add New Information</label>
 				<div class="dropdown">
 					<select class= "btn btn-info add-item-info" name="addType" id="category" required>
 						<option value="0">-- Select --</option>
 						<option value="1">Client Information</option>
-						<option value="2">Case Disk</option>
+						<option value="2">Case Disk</option>f
 					    <option value="3">Data Disk</option>
 					</select>
 				</div>
@@ -21,14 +23,17 @@
 
 			  <div class="panel panel-default" id="addNew_form">
 				<div class="panel-heading">
-				 	<h3 class="panel-title"><i class="fa fa-info-circle"></i> Choose an Information Category</h3>
+				 	<h3 class="panel-title"><i class="fa fa-info-circle"></i> Add Information </h3>
 	    	    </div>
+	    	    
 				<div class="panel-body" id="form">
-					<div class="form-group" id="client"> <!--CLIENT INFORMATION-->
-							<input type="hidden" id="clientId"  class="client-info"/>
+
+					<!--CLIENT INFORMATION-->
+					<div class="form-group" id="client"> 
+							<input type="hidden" id="clientId"  name="clientId" class="client-info"/>
 							<div class="form-group" id="grpName" >
 		                       <label id="lblName">First Name</label><br>
-		                       <input type="text" name="fname" class="form-control client-info" placeholder="First"><br>
+		                       <input type="text" name="fname" class="form-control client-info" placeholder="First Name"><br>
 		                       <label id="lblName">Last Name</label>
 		                       <input type="text" name="lname" class="form-control client-info" placeholder="Last Name">
 		                    </div>
@@ -41,7 +46,7 @@
 			                </div>
 			                <div div class="form-group" id="grpCDate">
      			               <label id="lblBirth">Birthdate</label><br>
-						       <input type="date" style="text-align: center;" class="form-control client-info" placeholder="yyyy-mm-dd" value="<?php echo date('Y-m-d') ?>" name="birthday" id="birthday"/>
+						       <input type="date" style="text-align: center;" class="form-control client-info" placeholder="mm-dd-yyyy" value="<?php echo date('Y-m-d') ?>" name="birthday" id="birthday"/>
 						    </div>
 			                <div div class="form-group" id="grpAddress">
 				                <label id="lblAddress">Address</label><br>
@@ -54,47 +59,24 @@
 				            <div class="form-group"  id="grpStatus">
 				            	<label id="lblStatus">Status</label><br>
 								<select name="clientStat" id="clientStat" class="form-control client-info">
-		                			<option value="walk-in">Walk-in</option>
-		                			<option value="retire">Retire</option>
+		                			<option value="Walk-in">Walk-in</option>
+		                			<option value="Client">Client</option>
 		                		</select>
 							</div>
 					</div><!--end of CLIENT INFORMATION-->
 
-					<div class="form-group" id="case"><!--CASE DISK-->
-							<div class="form-group" id="grpName" >
+					<!--DATA DISK-->
+		         	<div class="form-group" id="data">
+
+							<input type="hidden" id="clientId"  name="clientId" class="case-info"/>
+							<div class="form-group" id="grpName">
 		                        <label id="lblName">Client Name</label><br>
-		                        <input type="text" name="fname" class="form-control case-info" placeholder="First Name"><br>
-		                        <input type="text" name="lname" class="form-control case-info" placeholder="Last Name"><br>
+		                        <input type="text" name="dcfname" class="form-control client-info" placeholder="First"><br>
+ 								<input type="text" name="dclname" class="form-control client-info" placeholder="Last Name">
 		                    </div>
-		                    <div class="form-group" id="grpCdId" >
-		                       <label id="lblCdId">Case ID</label><br>
-		                       <input type="text" class="form-control case-info" placeholder="Case ID" name="cdId">
-		                    </div>
-		                    <div class="form-group" id="grpCdTitle" >
-		                       <label id="lblCdTitle">Case Title</label><br>
-		                       <input type="text" class="form-control case-info" placeholder="Case Title" name="cdTitle">
-		                    </div>
-		                    <div class="form-group" id="grpCdDesc" >
-		                       <label id="lblCdDesc">Case Description</label><br>
-		                       <input type="text" class="form-control case-info" placeholder="Description" name="cdDesc">
-		                    </div>
-		                    <div class="form-group" id="grpDoc">
-		                   		<label>Document</label>
-								<input type="file"  name="document" required /></br>
-							</div>
-
-		         	</div><!--end of CASE DISK-->
-
-					<div class="form-group" id="data"><!--DATA DISK-->
-						
-		                    <div class="form-group" id="grpName">
-		                        <label>Client Name</label><br>
-		                        <input type="text" class="form-control data-info" placeholder="Client Name" name="cName">
-		                    </div>
-		                    <div class="form-group" id="grpDdId" >
-		                       <label>Data ID</label><br>
-		                       <input type="text" class="form-control data-info" placeholder="Data ID" name="ddId">
-		                    </div>
+		                  
+		                       <input type="hidden" class="form-control data-info" placeholder="Data ID" name="ddId">
+		                    
 		                    <div class="form-group" id="grpDdTitle" >
 		                       <label>Data Title</label><br>
 		                       <input type="text" class="form-control data-info" placeholder="Data Title" name="ddTitle">
@@ -106,63 +88,133 @@
 
 		                    <div class="form-group" id="grpDoc">
 		                   		<label>Document</label>
-								<input type="file" name="document" required /></br>
+								<input type="file" class="form-control data-info" name="document" /></br>
+							</div>
+							<div class="form-group" id="grpCheckbox">
+								<label>Tags</label>
+								<br>
+								<input type="checkbox" class="case-info"  name="datatags[]" value="House of Deeds" /> House of deeds
+								<input type="checkbox" class="case-info"  name="datatags[]" value="Memorandum" /> Memorandum
+								<input type="checkbox" class="case-info"  name="datatags[]" value="Land Title" /> Land Title
+								<br>
+								</br><br>
+								<input type="text" class=" form-control case-info"  name="datatags[]" placeholder="Other tags (Please use comma for seperators)" />
 							</div>
 		                   
 		            </div><!--end of DATA DISK-->
-		            
-		           	<div class="form-group">
-							<button class="btn btn-default btn-success btn-md" type="button" id="addBtn"><i class="fa fa-check"></i>  Save </button> 
-							<button class="btn btn-default btn-primary btn-md" type="button" id="cancelAdd"><i class="fa fa-remove"></i>  Cancel </button> 
-					</div>  
+		     
+					<button class="btn btn-default btn-success btn-md" type="submit" name="save" id="addBtn"><i class="fa fa-check"></i>  Save </button> 
+					<button class="btn btn-default btn-primary btn-md cancelBtn" name="cancel" id="cancelAdd"><i class="fa fa-remove"></i>  Cancel </button>        
 				
+					
 				</div> <!-- end of panel body -->
-			  </div>
+			  </div> <!-- end of panel -->
+			</form>	<!-- end of client and data form -->
+
+			<!-- CASE form -->
+				<div class="panel panel-default" id="addNew_caseForm">
+					<div class="panel-heading">
+					 	<h3 class="panel-title"><i class="fa fa-info-circle"></i> Add Case Information </h3>
+		    	    </div>
+		    	    <div class="panel-body" id="">
+						<form method="Post" action="home-functions.php?action=add" enctype="multipart/form-data">
+				    	    <!--CASE DISK-->
+							<div class="form-group" id="">
+		 						<input type="hidden" name="addType" value="2">
+									<div class="form-group" id="grpName" >
+									<input type="hidden" id="clientId"  name="clientId" class="case-info"/>
+				                        <label id="lblName">Client Name</label><br>
+				                        <input type="text" name="ccfname" class="form-control case-info" placeholder="First Name"><br>
+		 								<input type="text" name="cclname" class="form-control case-info" placeholder="Last Name">
+				                    </div>
+				                    <div class="form-group" id="grpCdId" >
+				                       <label id="lblCdId">Case ID</label><br>
+				                       <input type="text" class="form-control case-info" placeholder="Case ID" name="cdId">
+				                    </div>
+				                    <div class="form-group" id="grpCdTitle" >
+				                       <label id="lblCdTitle">Case Title</label><br>
+				                       <input type="text" class="form-control case-info" placeholder="Case Title" name="cdTitle">
+				                    </div>
+				                    <div class="form-group" id="grpCdDesc" >
+				                       <label id="lblCdDesc">Case Description</label><br>
+				                       <input type="text" class="form-control case-info" placeholder="Description" name="cdDesc">
+				                    </div>
+					                    
+					                    <label>Document</label>
+										<input type="file" class="case-info"  name="document" /></br>
+
+									<div class="form-group" id="grpCheckbox">
+										<label>Tags</label>
+										<br>
+										<input type="checkbox" class="case-info"  name="casetags[]" value="Murder" /> Murder
+										<input type="checkbox" class="case-info"  name="casetags[]" value="Rape" /> Rape
+										<input type="checkbox" class="case-info"  name="casetags[]" value="Fraud" /> Fraud
+										<br>
+										<input type="checkbox" class="case-info"  name="casetags[]" value="Robbery" /> Robbery
+										<input type="checkbox" class="case-info"  name="casetags[]" value="Illegal Drugs" /> Illegal Drugs
+										</br><br>
+										<input type="text" class=" form-control case-info"  name="casetags[]" placeholder="Other tags (Please use comma for seperators)" />
+									</div>
+
+				         	</div><!--end of CASE DISK-->
+
+			         	<button class="btn btn-default btn-success btn-md" type="submit" name="save" id=""><i class="fa fa-check"></i>  Save </button> 
+						<button class="btn btn-default btn-primary btn-md cancelBtn" name="cancel" id=""><i class="fa fa-remove"></i>  Cancel </button>  
+
+						</form> <!-- end of data form -->
+		    	    </div> <!-- end of panel body -->
+	    		</div><!-- end of panel -->
+
 		</div><!--end of add new item-->
-	</form>	<!-- end of form -->
-	<!--Display item list-->
-	<div  id="list-parts-panel" class="panel panel-info">
-		<div class="panel-heading"></div>
-		<div class="panel-body" id="panel">
-			<label id="category-text" class="">Category:</label>
-						  
-			<select class= "form-control" id="categorySearch">
-			<!--<option value="0" selected="selected">All</option>-->
-				<option value="1" selected="selected">Case Disk</option>
-				<option value="2">Data Disk</option>			</select>
-		</div>
-								
-		<div class="panel-body table-responsive">
-			<table class="table table-hover" id="item-list-tbl">
-			  <thead>
-				<tr>
-					<th>Client Name</th>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Description</th>
-					<th>Document</th>
-
-				</tr>
-			  </thead>
-			  <tbody id="item-tbl-body">
-			  <!-- to be filled dynamically -->
-			  </tbody>
-			</table>
-		</div>
-
-	</div> <!-- end of list-parts panel -->
-	<!--end of display item list-->
+	
 </div>
+
+
 <?php
 	include 'footer.php';
 ?>
 
+
+<?php
+
+if (isset($_GET['page'])){ 
+    if($_GET['page']=="adding"){             
+        if(!empty($_GET['msg'])){
+
+            switch ($_GET['msg']) {
+                    case 'existing':
+?>
+                         <script>
+	                        alert('Case ID already existed. Please try again.');
+                        </script>
+<?php
+                    break;
+                    case 'nodocu':
+?>
+					<script>
+	                    alert('No doument provided. Please choose a document when adding Case or Data file.');
+                    </script>
+<?php
+					 break;
+                    case 'noclient':
+?>
+					<script>
+	                    alert('No such client existed. Please double check the name of your client.');
+                    </script>
+<?php
+            }
+        }
+    }
+}
+?>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
-
+ 	
 		$('#addNew_div').hide(); /* id of div you want to hide */
 		$('#addNew_form').hide(); /* id of div you want to hide */
+		$('#addNew_caseForm').hide(); /* id of div you want to hide */
 		var show = 0; //checks if form '#addNew_form' is hidden
 
 		$('#toggle_div').click(function(){
@@ -174,7 +226,8 @@
 				$('#toggle_div').attr('value', 'Hide Form');
 			}else if(value=='Hide Form'){
 				$('#addNew_div').toggle('fast');
-				$('#addNew_form').toggle('fast');
+				$('#addNew_form').hide();
+				$('#addNew_caseForm').hide();
 				$('#category').val('0');
 				$('#toggle_div').attr('value', 'Add New');
 				show = 0;
@@ -182,104 +235,42 @@
 			//console.log($('#classificationCode').val());
 		});
 
-		$("#addBtn").on({
-		    click: addInfo
-		})
-
-
-			function addInfo(){
-				var clientInfo = document.getElementsByClassName('client-info');
-				var caseInfo = document.getElementsByClassName('case-info');
-				var dataInfo = document.getElementsByClassName('data-info');
-				var client = [];
-				var casedisk = [];
-				var datadisk = [];
-				var cat = $('#category').val();
-
-				
-				
-				for(var x in clientInfo){
-					client.push(clientInfo[x].value);
-				}
-				for(var x in caseInfo){
-					casedisk.push(caseInfo[x].value);
-				}
-				for(var x in dataInfo){
-					datadisk.push(dataInfo[x].value);
-				}
-		        console.log(client);
-				console.log(casedisk);
-				console.log(datadisk);
-
-
-		
-				$.ajax({
-		            url: "home_functions.php",
-		            method: "POST",
-		            data: {
-		              action: 'addNewInfo',
-		              clientDetails: client,
-		              caseDetails: casedisk,
-		              dataDetails: datadisk,
-		              category: cat
-		              
-		            },
-		            success: function(response){
-		              //var data = JSON.parse(response);
-		              console.log(response);
-		              //console.log(data);
-		              alert("Success!");
-		              location.reload();
-
-		             
-		            },
-		            error: function(response){
-		              console.log(response);
-		              
-		            }
-		       
-		        })
-			}
-			
-
-
-	
-
-		
 		$('#category').change(function(){
-
 			var value = $('#category').val(); /* id of dropdown menu */
 			if(show==0){
 				$('#addNew_form').toggle('fast');
 				show = 1;
 			}
 			if (value == 1) {
+				$('#addNew_form').show();
 				$('#form').show();
 				$('#client').show();
-				$('#case').hide();
+				$('#addNew_caseForm').hide();
 				$('#data').hide();
 			}else if(value == 2){
-				$('#form').show();				
-				$('#client').hide();
-				$('#case').show();
-				$('#data').hide();
+				$('#addNew_form').hide();
+				$('#addNew_caseForm').show();
+				//$('#form').show();				
+				//$('#client').hide();
+				//$('#data').hide();
 			}else if(value == 3){
+				$('#addNew_form').show();
 				$('#form').show();
 				$('#client').hide();
-				$('#case').hide();
+				$('#addNew_caseForm').hide();
 				$('#data').show();
 			}else{
 				$('#form').hide();
 				$('#client').hide();
-				$('#case').hide();
 				$('#data').hide();
 			}
 
 		});
 
 
+		$('.cancelBtn').click(function(){
+			location.reload();
+		});
+
 	});
 </script>
-	
-	
-

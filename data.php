@@ -26,7 +26,7 @@
 
 <?php
 
-	$query = "SELECT dataID, c.clientFname, c.clientLname from data_disk dd join client c on dd.clientID = c.clientID WHERE  dd.clientID = c.clientID";
+	$query = "SELECT c.clientID, dataID, c.clientFname, c.clientLname from data_disk dd join client c on dd.clientID = c.clientID WHERE  dd.clientID = c.clientID GROUP BY c.clientID";
     $res = mysqli_query($conn, $query);
     $data;
     if($res){
@@ -49,12 +49,15 @@
       listTbl.html("");
     
          for(var x=0;x<resdata.length;x++){
-          clientId=resdata[x].clientID;
+           clientId=resdata[x].clientID;
            var tRow = "<tr>";
-               tRow += "<td>" + resdata[x].clientLname  +" "+  resdata[x].clientFname +"</td>";
+               tRow += "<td><a href='client-data.php?id=" + resdata[x].clientID + "'>" + resdata[x].clientLname  +" "+  resdata[x].clientFname +"</a></td>";
                tRow += "</tr>";
           listTbl.append(tRow);
         }   // end of populating data
+
+         $('#item-list-tbl').dataTable();
+
 
   });
 	

@@ -1,12 +1,12 @@
 <?php
 	include_once("config/config.php");
 
-	/*
+	
 	if(!(isset($_SESSION['userStatus']))){
 		session_destroy();
-		header("Location: ../");
+		header("Location: ../ilaganlawoffice");
 	}
-	*/
+    //echo $_SESSION['userStatus'];
 ?>
 
 
@@ -24,8 +24,19 @@
 			<!-- Bootstrap Core CSS -->
 			<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-			<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-			
+			<!-- Bootstrap core CSS -->
+			<link href="css/bootstrap.css" rel="stylesheet">
+			<!--external css-->
+			<link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+			<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css">
+
+			<!-- Custom styles for this page-->
+			<link href="css/style.css" rel="stylesheet">
+			<link href="css/style-responsive.css" rel="stylesheet">
+			<link href="css/table-responsive.css" rel="stylesheet">
+
+
 			<!-- Admin CSS -->
 			<link href="css/main.css" rel="stylesheet" type="text/css"/>
 			
