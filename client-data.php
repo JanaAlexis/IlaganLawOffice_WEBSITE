@@ -90,7 +90,7 @@ global $id;
 						echo "<td>".$row['dataDate']."</td>";
 						echo "<td>".$row['dataDesc']."</td>";
 						echo "<td>".$row['dataTags']."</td>";
-						echo "<td><a  target='_blank' href='df.php?id=".$row['dataID']."'>".$row['filename']."</a></td>";
+						echo "<td><a  target='_blank' href='df.php?id=".$row['dataID']."'>".$row['dfilename']."</a></td>";
 						echo "</tr>";
 
 						

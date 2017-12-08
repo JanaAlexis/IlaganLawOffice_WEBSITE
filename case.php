@@ -50,10 +50,11 @@
                tRow += "<td><a href='client-case.php?id=" + resdata[x].clientID + "'>" + resdata[x].clientLname  +" "+  resdata[x].clientFname +"</a></td>";
                tRow += "</tr>";
           listTbl.append(tRow);
-        }   // end of populating data
 
-          $('#item-list-tbl').dataTable();
+        }// end of populating data
+        $('#item-list-tbl').dataTable();
 
+          
 
   });
 	

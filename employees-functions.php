@@ -14,17 +14,23 @@
 	}
 
 	function addNewEmp(){
-
 		$employee = $_POST['empDetails'];
-
 		$empFname = ucfirst($employee[1]);
 		$empLname = ucfirst($employee[2]);
 		$empUname = strtolower($employee[3]);
 		$hashedpassword = md5($employee[4]);
 
-			$conn = mysqli_connect("localhost","root","","lawfirm");
-			$insertEmp = "INSERT INTO employee (`empFname`, `empLname`, `username`, `password`, `empStat`) VALUES ('$empFname', '$empLname', '$empUname', '$hashedpassword', '$employee[5]')";
-			$sql = mysqli_query($conn, $insertEmp) or die(mysqli_error($conn));
+		$conn = mysqli_connect("localhost","root","","lawfirm");
+  		$query = mysqli_query($conn, "SELECT * FROM employee WHERE empFname = '".$empFname."' AND empLname = '".$empLname."'") or die(mysqli_error($conn));
+			
+			 if (mysqli_num_rows($query)>=1) {
+			    echo 'true';  
+			 } else {
+			    echo 'false';
+		   		$insertEmp = "INSERT INTO employee (`empFname`, `empLname`, `username`, `password`, `empStat`) VALUES ('$empFname', '$empLname', '$empUname', '$hashedpassword', '$employee[5]')";
+				$sql = mysqli_query($conn, $insertEmp) or die(mysqli_error($conn));
+			  }
+			
 
 		/*else if($category<>2){
 
@@ -33,7 +39,8 @@
 		}*/
 
 		//echo json_encode($payment);
-		echo $insertEmp;
+	
+	
 	}
 
 	function update() {

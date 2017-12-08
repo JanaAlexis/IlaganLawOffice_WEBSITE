@@ -5,10 +5,10 @@
 		echo $id;
 		$query = mysqli_query($conn, "SELECT * FROM data_disk WHERE dataID = '$id'");
 		$row = mysqli_fetch_assoc($query);
-		$data = $row['filedata'];	
-		echo $row['filename'];
-		header("Content-type: ".$row['filemime']);
-		header('Content-disposition: attachment; filename="'.$row['filename'].'"');
+		$data = $row['dfiledata'];	
+		echo $row['dfilename'];
+		header("Content-type: ".$row['dfilemime']);
+		header('Content-disposition: attachment; filename="'.$row['dfilename'].'"');
 		ob_clean();
 		
 		echo $data;

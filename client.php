@@ -118,18 +118,16 @@ $user = $_SESSION['userId'];
 <script type="text/javascript"> //Javascript/jquery when opening document
   $(document).ready(function(){
 
-  	$("#client-tbl").dataTable();
-
 
     var resdata = <?php echo json_encode($resdata) ?>; // Populate record data in table using the data from php query
    	console.log(resdata);
 
       var rsvTbl = $("#client-tbl-body");
       rsvTbl.html("");
-  
+  	   var clientId = 0;
 
          for(var x=0;x<resdata.length;x++){
-         var clientId=resdata[x].clientID;
+           clientId = resdata[x].clientID;
            var tRow = "<tr>";
                tRow += "<td>" + resdata[x].clientFname + "</td>";
                tRow += "<td>" + resdata[x].clientLname + "</td>";
@@ -141,8 +139,11 @@ $user = $_SESSION['userId'];
 	           tRow += "<td><div class='actions-menu'><button type='button' class='btn btn-sm btn-default editRecord' data-clientFName='"+resdata[x].clientFname+"' data-clientLName='"+resdata[x].clientLname+"' data-clientGen='"+resdata[x].clientGen+"' data-clientBirth='"+resdata[x].clientBirth+"' data-clientAdd='"+resdata[x].clientAdd+"' data-clientCon='"+resdata[x].clientCon+"' data-clientStatus='"+resdata[x].clientStat+"' data-toggle='modal' data-target='#update-staff-modal' id='"+ clientId+"'><i class='fa fa-edit' style='color:green;'></i></button></div></td>";
                tRow += "</tr>";
 
-         rsvTbl.append(tRow);
+         rsvTbl.append(tRow);	
+         
         }   // end of populating data
+        $('#client-tbl').dataTable();
+       
 
 
 

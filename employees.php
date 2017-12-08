@@ -17,7 +17,7 @@
 							</div>
 							
 							<div class="panel-body">
-								<form>
+								<form id="form">
 								  <div class="form-group">
 									<label style="display: none;">Employee ID<span style="color: red;">*</span></label>
 									<input type="hidden" name="empID" placeholder="ID number/code" class="form-control staff-info" required/>
@@ -45,7 +45,7 @@
 								  </div>
 								  
 								  <div class="form-group">
-									<button class="btn btn-success b10" type="button" id="addStaff">
+									<button class="btn btn-success b10" type="submit" id="addStaff">
 									<i class="fa fa-check"></i>  Add                               
 									</button>
 									<button class="btn btn-primary b10" type="button" id="cancel">
@@ -89,7 +89,7 @@
 											<h4 class="modal-title"><i class="fa fa-info-circle"></i> Modify Record</h4>
 										</div>
 										<div class="modal-body">
-											<form>
+											<form id="addform">
 												  <div class="form-group">
 													<label>Employee ID</span></label>
 													<input type="text" name="empID" 
@@ -185,7 +185,9 @@
 	$(".editEmpRecord").on({
           click: editRecord
       })
-
+	$("#cancel").click(function(){
+			location.reload();
+	});
 
       function editRecord(){
             var empId = $(this).attr("id");
@@ -226,13 +228,10 @@
 			//console.log($('#classificationCode').val());
 		});
 
-		$("#addStaff").on({
-		    click: addEmployee
-		})
-		
-		function addEmployee(){
-				var empInfo = document.getElementsByClassName('staff-info');
-				var employee = [];
+		$("#form").submit(function(e) {
+			e.preventDefault();
+			var empInfo = document.getElementsByClassName('staff-info');
+			var employee = [];
 				
 				for(var x in empInfo){
 					employee.push(empInfo[x].value);
@@ -248,19 +247,27 @@
 		            success: function(response){
 		              //var data = JSON.parse(response);
 		              console.log(response);
+		              console.log(response.length);
+		         	if(response === 'true'){
+					 	alert("Employee Already Exists");	
+		       		}else if(response === 'false'){
+		             	alert("Success!");
+			            location.reload(); 	
+		              }
 		              //console.log(data);
-		              alert("Success!");
-		              location.reload();
-
-		             
 		            },
 		            error: function(response){
+		            
 		              console.log(response);
 		              
 		            }
 		       
 		        })
-			}
+					
+
+
+		})
+		
 		/* end of ADDING NEW EMPLOYEES */
 
 		/*UPDATING EMPLOYEE*/

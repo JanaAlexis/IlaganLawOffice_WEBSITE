@@ -22,15 +22,32 @@
 		          $clientFname = ucfirst($clientFname);
 		          $clientLname = ucfirst($clientLname);
 
-	              $conn = mysqli_connect("localhost","root","","lawfirm");
-	              $insertClient = "INSERT INTO client (`clientFname`, `clientLname`, `clientGen`, `clientBirth`, `clientAdd`, `clientCon`, `clientStat`) VALUES ('$clientFname', '$clientLname', '$clientGen', '$clientBirth', '$clientAdd', '$clientCon', '$clientStat')";
-	              $sql = mysqli_query($conn, $insertClient) or die(mysqli_error($conn));
+		          $conn = mysqli_connect("localhost","root","","lawfirm");
+				  $query = "SELECT * FROM `client` WHERE `clientFname` = '$clientFname' AND `clientLname` = '$clientLname'";
+				  $sql = mysqli_query($conn, $query);
+				  if(mysqli_num_rows($sql)>1){
 
-	              //echo $insertClient;
-	              header("Location: client.php");
+		              $conn = mysqli_connect("localhost","root","","lawfirm");
+		              $insertClient = "INSERT INTO client (`clientFname`, `clientLname`, `clientGen`, `clientBirth`, `clientAdd`, `clientCon`, `clientStat`) VALUES ('$clientFname', '$clientLname', '$clientGen', '$clientBirth', '$clientAdd', '$clientCon', '$clientStat')";
+		              $sql = mysqli_query($conn, $insertClient) or die(mysqli_error($conn));
+
+		              //echo $insertClient;
+		              header("Location: client.php");
+	          	
+	          	  }else{
+				  			$_SESSION['fname'] = $clientFname;
+				  			$_SESSION['lname'] = $clientLname; 
+				  			$_SESSION['clientGen'] = $clientGen;
+				  			$_SESSION['bday'] = $clientBirth;
+				  			$_SESSION['cAdd'] = $clientAdd;
+				  			$_SESSION['cCon'] = $clientAdd;
+				  			$_SESSION['cStat'] = $clientStat;
+				
+	                        header("Location: home.php?page=adding&msg=clientexisting");
+				  }
 
 	            }else if ($category == 2){
-
+	            	
 	            	$ccFname = $_POST['ccfname'];
 		            $ccLname = $_POST['cclname'];
 		            $caseId = $_POST['cdId'];
@@ -39,13 +56,10 @@
 		            $casetags = $_POST['casetags'];
 		            $ctags = implode(",", $casetags);
 		            echo $ctags;
-
-					if(is_uploaded_file($_FILES['document']['tmp_name'])) {
+		            
 		            	$conn = mysqli_connect("localhost","root","","lawfirm");
-
-		            	$query = "SELECT `caseID` FROM `case_disk` WHERE `caseID` = '$caseId'";
+						$query = "SELECT * FROM `case_disk` WHERE `caseID` = '$caseId'";
 				  		$sql = mysqli_query($conn, $query);
-
 				  		if(mysqli_num_rows($sql)<1){
 
 				  			$ccFname = ucfirst($ccFname);
@@ -68,17 +82,28 @@
 					           
 									header("Location: case.php");
 							}else{
-								header("Location: home.php?page=adding&msg=noclient");
+								$_SESSION['ccfname'] = $ccFname; 
+					  			$_SESSION['cclname'] = $ccLname; 
+					  			$_SESSION['caseId'] = $caseId;
+					  			$_SESSION['cdTitle'] = $caseTitle;
+					  			$_SESSION['cdDesc'] = $caseDesc;
+					  			$_SESSION['category'] = $category;
+
+								header("Location: home.php?page=adding&msg=nocclient");
 
 				  			}
 				  		}else{
+				  			$_SESSION['ccfname'] = $ccFname; 
+				  			$_SESSION['cclname'] = $ccLname; 
+				  			$_SESSION['caseId'] = $caseId;
+				  			$_SESSION['cdTitle'] = $caseTitle;
+				  			$_SESSION['cdDesc'] = $caseDesc;
+				  			$_SESSION['ctags'] = $ctags;
+				  			$_SESSION['addType'] = $category;
+				
 	                        header("Location: home.php?page=adding&msg=existing");
 				  		}
-					}else{
-
-						header("Location: home.php?page=adding&msg=nodocu");
-
-					}
+					
 
 				}else if ($category == 3){
 				 	$dcFname = $_POST['dcfname'];
@@ -89,7 +114,6 @@
 		            $datatags = $_POST['datatags'];
 		            $dtags = implode(",", $datatags);  
 
-		            if(is_uploaded_file($_FILES['document']['tmp_name'])) {
 		            	$conn = mysqli_connect("localhost","root","","lawfirm");
 		            	$dataquery = "SELECT `clientID` FROM `client` WHERE `clientFname` = '$dcFname' AND `clientLname` = '$dcLname'";
 				  		$datares = mysqli_query($conn, $dataquery) or die(mysqli_error($conn));
@@ -104,21 +128,20 @@
 
 
 					 		$conn = mysqli_connect("localhost","root","","lawfirm");
-			                $insertData = "INSERT INTO data_disk (clientID, dataTitle, dataDesc, dataTags, filename, filemime, filedata) VALUES ('$drow[clientID]', '$dataTitle', '$dataDesc','$dtags', '$name','$type','$data')";
+			                $insertData = "INSERT INTO data_disk (clientID, dataTitle, dataDesc, dataTags, dfilename, dfilemime, dfiledata) VALUES ('$drow[clientID]', '$dataTitle', '$dataDesc','$dtags', '$name','$type','$data')";
 			                $sql = mysqli_query($conn, $insertData) or die(mysqli_error($conn));
 
 			                header("Location: data.php");
 				  		}else{
-							header("Location: home.php?page=adding&msg=noclient");
-
-				  		}
+						  		$_SESSION['dcfname'] = $dcFname; 
+					  			$_SESSION['dclname'] = $dcLname; 
+					  			$_SESSION['dataId'] = $dataId;
+					  			$_SESSION['ddTitle'] = $dataTitle;
+					  			$_SESSION['ddDesc'] = $dataDesc;
+					  		
+							header("Location: home.php?page=adding&msg=nodclient");
+						}
 				  		
-
-		         	}else{
-
-						header("Location: home.php?page=adding&msg=nodocu");
-
-					}
 		        }else{
 		           	echo "Invalid category.";
 		        }
